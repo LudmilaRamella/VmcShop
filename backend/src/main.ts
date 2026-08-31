@@ -13,11 +13,28 @@ async function bootstrap() {
   // useStaticAssets, que se usa mas abajo para servir las fotos de producto.
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get(ConfigService);
+  const esProduccion = config.get<string>('NODE_ENV') === 'production';
+  const frontendUrl = config.get<string>('FRONTEND_URL') || 'http://localhost:5173';
+  const origenesPermitidos = frontendUrl
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  if (esProduccion) {
+    app.set('trust proxy', 1);
+  }
 
   // Habilita CORS solo para el origen del frontend Vue, y permite que el
   // navegador mande la cookie de sesion en las peticiones (credentials).
   app.enableCors({
-    origin: config.get('FRONTEND_URL'),
+    origin: (origin, callback) => {
+      if (!origin || origenesPermitidos.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Origen no permitido por CORS'), false);
+    },
     credentials: true,
   });
 
@@ -33,6 +50,8 @@ async function bootstrap() {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
+        secure: esProduccion,
+        sameSite: esProduccion ? 'none' : 'lax',
         maxAge: 24 * 60 * 60 * 1000, // 24 horas
       },
     }),
@@ -74,10 +93,10 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads' });
 
   // Todas las rutas quedan bajo /api (ej. /api/productos, /api/auth/login)
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', { exclude: ['health'] });
 
-  const puerto = config.get('PORT') || 3000;
-  await app.listen(puerto);
+  const puerto = Number(config.get('PORT') || 3000);
+  await app.listen(puerto, '0.0.0.0');
   console.log(`Backend corriendo en http://localhost:${puerto}/api`);
 }
 bootstrap();

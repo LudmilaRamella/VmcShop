@@ -6,12 +6,27 @@ import { Server } from 'socket.io';
 // detalle de producto y el carrito de TODOS los clientes conectados se
 // resincronicen solos, sin esperar a que el usuario recargue la pagina.
 //
-// No requiere autenticacion ni CORS restringido a un origen puntual: lo que
-// viaja por este canal es solo un aviso de "algo cambio" (el id del
-// producto), nunca datos sensibles ni la cookie de sesion. Cada cliente,
-// al recibir el aviso, vuelve a pedir por REST lo que le interese; ese
-// pedido si pasa por los guards normales.
-@WebSocketGateway({ cors: { origin: true } })
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+const origenesPermitidos = frontendUrl
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+// Usa el mismo origen permitido que el frontend REST. Por este canal solo
+// viajan avisos de cambio, nunca datos sensibles.
+@WebSocketGateway({
+  cors: {
+    origin: (origin, callback) => {
+      if (!origin || origenesPermitidos.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Origen no permitido por CORS'), false);
+    },
+    credentials: true,
+  },
+})
 export class RealtimeGateway {
   @WebSocketServer()
   private server: Server;

@@ -12,6 +12,7 @@ import { PromocionesModule } from './promociones/promociones.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { BannersModule } from './banners/banners.module';
 import { ServiciosModule } from './servicios/servicios.module';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -26,20 +27,34 @@ import { ServiciosModule } from './servicios/servicios.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
-        username: config.get('DB_USER'),
-        password: config.get('DB_PASSWORD'),
-        database: config.get('DB_NAME'),
-        autoLoadEntities: true, // toma automaticamente las entidades registradas en cada modulo
-        // synchronize crea/actualiza las tablas segun las entidades sin
-        // necesidad de escribir migraciones a mano. Es comodo para el
-        // desarrollo y para levantar el proyecto en una defensa, pero en un
-        // sistema en produccion se reemplazaria por migraciones.
-        synchronize: true,
-      }),
+      useFactory: (config: ConfigService) => {
+        const esProduccion = config.get<string>('NODE_ENV') === 'production';
+        const sslHabilitado = config.get<string>('DB_SSL') === 'true';
+        const sslCa = config.get<string>('DB_SSL_CA');
+        const synchronizeConfig = config.get<string>('DB_SYNCHRONIZE');
+
+        return {
+          type: 'mysql',
+          host: config.get('DB_HOST'),
+          port: Number(config.get('DB_PORT') || 3306),
+          username: config.get('DB_USER'),
+          password: config.get('DB_PASSWORD'),
+          database: config.get('DB_NAME'),
+          autoLoadEntities: true, // toma automaticamente las entidades registradas en cada modulo
+          // En produccion debe quedar en false para evitar cambios automaticos
+          // de esquema sobre datos existentes. Localmente conserva el
+          // comportamiento anterior si DB_SYNCHRONIZE no esta definido.
+          synchronize:
+            synchronizeConfig === undefined ? !esProduccion : synchronizeConfig === 'true',
+          ssl: sslHabilitado
+            ? {
+                rejectUnauthorized:
+                  config.get<string>('DB_SSL_REJECT_UNAUTHORIZED') !== 'false',
+                ...(sslCa ? { ca: sslCa.replace(/\\n/g, '\n') } : {}),
+              }
+            : undefined,
+        };
+      },
     }),
 
     AuthModule,
@@ -54,5 +69,6 @@ import { ServiciosModule } from './servicios/servicios.module';
     BannersModule,
     ServiciosModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}
