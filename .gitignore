@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime uploads
+uploads/
+backend/uploads/
+
+# Editors and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary/cache files
+tmp/
+temp/
+.tmp/
+.temp/
+.cache/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Local assistant/tooling state
+.claude/
+
+# Local/private academic or delivery files
+cuentas.txt
+TrabajoFinalIntegrador*
+DIAGRAMA ERD.pdf
+docs/
+*.pdf
+*.doc
+*.docx
+*.docx.txt
