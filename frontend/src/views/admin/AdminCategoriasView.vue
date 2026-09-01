@@ -4,6 +4,7 @@ import api from '../../services/api'
 import Paginador from '../../components/Paginador.vue'
 import { usePaginadoCliente } from '../../composables/usePaginadoCliente'
 import { useNotificacionesStore } from '../../stores/notificaciones'
+import { uploadUrl } from '../../utils/uploads'
 
 const notificaciones = useNotificacionesStore()
 
@@ -158,7 +159,7 @@ onMounted(cargar)
         <tbody class="divide-y divide-gray-100">
           <tr v-for="c in categoriasPagina" :key="c.id" class="hover:bg-gray-50/60">
             <td class="p-3">
-              <img v-if="c.imagen" :src="`/uploads/categorias/${c.imagen}`" class="w-9 h-9 object-cover rounded-full" />
+              <img v-if="c.imagen" :src="uploadUrl('categorias', c.imagen)" class="w-9 h-9 object-cover rounded-full" />
               <div v-else class="w-9 h-9 rounded-full bg-primary-50 text-primary-400 flex items-center justify-center text-xs font-bold">
                 {{ c.nombre?.[0]?.toUpperCase() }}
               </div>

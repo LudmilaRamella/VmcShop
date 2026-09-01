@@ -4,6 +4,7 @@ import api from '../../services/api'
 import Paginador from '../../components/Paginador.vue'
 import { usePaginadoCliente } from '../../composables/usePaginadoCliente'
 import { useNotificacionesStore } from '../../stores/notificaciones'
+import { uploadUrl } from '../../utils/uploads'
 
 const notificaciones = useNotificacionesStore()
 
@@ -143,7 +144,7 @@ onMounted(cargar)
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <div v-for="b in bannersPagina" :key="b.id" class="card overflow-hidden flex flex-col">
-        <img :src="`/uploads/banners/${b.imagen}`" class="w-full aspect-[16/5] object-cover" />
+        <img :src="uploadUrl('banners', b.imagen)" class="w-full aspect-[16/5] object-cover" />
         <div class="p-2.5 flex flex-col gap-1.5">
           <span :class="b.activo ? 'badge-success' : 'badge-danger'" class="self-start">
             {{ b.activo ? 'Activo' : 'Inactivo' }}

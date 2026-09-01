@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import api from '../services/api'
 import { useAuthStore } from '../stores/auth'
 import logo from '../assets/logo.png'
+import { uploadUrl } from '../utils/uploads'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -131,7 +132,7 @@ onMounted(cargarInicio)
         :class="b.enlaceUrl ? 'cursor-pointer' : ''"
         class="flex justify-center"
       >
-        <img :src="`/uploads/banners/${b.imagen}`" class="max-h-[70vh] w-full object-contain" />
+        <img :src="uploadUrl('banners', b.imagen)" class="max-h-[70vh] w-full object-contain" />
       </div>
 
       <div v-if="banners.length > 1" class="flex justify-center gap-2 py-3">
@@ -157,7 +158,7 @@ onMounted(cargarInicio)
         >
           <img
             v-if="c.imagen"
-            :src="`/uploads/categorias/${c.imagen}`"
+            :src="uploadUrl('categorias', c.imagen)"
             :alt="c.nombre"
             class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
           />
@@ -185,7 +186,7 @@ onMounted(cargarInicio)
           >
             <img
               v-if="m.imagen"
-              :src="`/uploads/marcas/${m.imagen}`"
+              :src="uploadUrl('marcas', m.imagen)"
               :alt="m.nombre"
               class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
             />

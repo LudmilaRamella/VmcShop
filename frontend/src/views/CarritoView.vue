@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { useCarritoStore } from '../stores/carrito'
 import { useNotificacionesStore } from '../stores/notificaciones'
 import socket from '../services/socket'
+import { uploadUrl } from '../utils/uploads'
 
 const carrito = useCarritoStore()
 const notificaciones = useNotificacionesStore()
@@ -119,7 +120,7 @@ async function confirmar() {
           <div v-for="item in carrito.items" :key="item.id" class="card p-3 flex flex-wrap sm:flex-nowrap items-center gap-3">
             <img
               v-if="item.producto.imagen"
-              :src="`/uploads/productos/${item.producto.imagen}`"
+              :src="uploadUrl('productos', item.producto.imagen)"
               class="w-16 h-16 object-cover rounded-lg shrink-0"
             />
             <div v-else class="w-16 h-16 bg-primary-50 rounded-lg flex items-center justify-center text-2xl text-primary-200 shrink-0">

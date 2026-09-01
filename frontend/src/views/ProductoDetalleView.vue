@@ -5,6 +5,7 @@ import api from '../services/api'
 import { useAuthStore } from '../stores/auth'
 import { useCarritoStore } from '../stores/carrito'
 import socket from '../services/socket'
+import { uploadUrl } from '../utils/uploads'
 
 const route = useRoute()
 const router = useRouter()
@@ -88,7 +89,7 @@ onUnmounted(() => socket.off('producto:cambio', alCambiarUnProducto))
       <div class="relative aspect-square bg-gray-100 rounded-xl overflow-hidden">
         <img
           v-if="producto.imagen"
-          :src="`/uploads/productos/${producto.imagen}`"
+          :src="uploadUrl('productos', producto.imagen)"
           :alt="producto.nombre"
           class="h-full w-full object-cover"
         />

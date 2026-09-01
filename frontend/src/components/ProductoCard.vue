@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { uploadUrl } from '../utils/uploads'
 
 const props = defineProps({
   producto: { type: Object, required: true },
@@ -26,7 +27,7 @@ function etiquetaDescuento(promocion) {
     >
       <img
         v-if="producto.imagen"
-        :src="`/uploads/productos/${producto.imagen}`"
+        :src="uploadUrl('productos', producto.imagen)"
         :alt="producto.nombre"
         loading="lazy"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
