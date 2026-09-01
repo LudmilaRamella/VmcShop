@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CategoriasModule } from './categorias/categorias.module';
@@ -30,7 +32,13 @@ import { HealthController } from './health.controller';
       useFactory: (config: ConfigService) => {
         const esProduccion = config.get<string>('NODE_ENV') === 'production';
         const sslHabilitado = config.get<string>('DB_SSL') === 'true';
-        const sslCa = config.get<string>('DB_SSL_CA');
+        const sslCaEnv = config.get<string>('DB_SSL_CA');
+        const sslCaPath = config.get<string>('DB_SSL_CA_PATH');
+        const sslCa = sslCaEnv
+          ? sslCaEnv.replace(/\\n/g, '\n')
+          : sslCaPath
+            ? readFileSync(resolve(process.cwd(), sslCaPath), 'utf8')
+            : undefined;
         const synchronizeConfig = config.get<string>('DB_SYNCHRONIZE');
 
         return {
@@ -48,9 +56,9 @@ import { HealthController } from './health.controller';
             synchronizeConfig === undefined ? !esProduccion : synchronizeConfig === 'true',
           ssl: sslHabilitado
             ? {
-                rejectUnauthorized:
-                  config.get<string>('DB_SSL_REJECT_UNAUTHORIZED') !== 'false',
-                ...(sslCa ? { ca: sslCa.replace(/\\n/g, '\n') } : {}),
+              rejectUnauthorized:
+                config.get<string>('DB_SSL_REJECT_UNAUTHORIZED') !== 'false',
+                ...(sslCa ? { ca: sslCa } : {}),
               }
             : undefined,
         };
