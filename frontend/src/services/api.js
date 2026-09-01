@@ -8,7 +8,7 @@ import axios from 'axios'
 // cookie de sesion (connect.sid) en cada request: sin esto, el backend
 // recibiria las peticiones como si nadie estuviera logueado.
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   withCredentials: true,
 })
 
