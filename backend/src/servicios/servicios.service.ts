@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MailService } from '../common/mail/mail.service';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { Usuario } from '../usuarios/entities/usuario.entity';
@@ -12,6 +13,7 @@ export class ServiciosService {
   constructor(
     private readonly mailService: MailService,
     private readonly usuariosService: UsuariosService,
+    private readonly config: ConfigService,
   ) {}
 
   // Solicitud provisoria de turno: no persiste nada (no hay tabla de
@@ -68,10 +70,16 @@ export class ServiciosService {
       <p><em>Solicitud pendiente de coordinación.</em></p>
     `;
 
+    // En demo con onboarding@resend.dev, Resend solo permite enviar al
+    // destinatario de prueba configurado. Igual se conserva la consulta de
+    // admins activos para mantener la regla funcional.
+    const destinatarioPrueba = this.config.get<string>('RESEND_TEST_RECIPIENT')?.trim();
+    const destinatariosAdmin = destinatarioPrueba ? [destinatarioPrueba] : emailsAdmin;
+
     // Un mail por admin (nunca todos en un mismo "to"/"cc") para que no se
     // vean las direcciones de los demas administradores entre si.
     const envios = await Promise.all(
-      emailsAdmin.map((email) =>
+      destinatariosAdmin.map((email) =>
         this.mailService.enviar(email, `Nueva solicitud de turno - ${servicio}`, htmlAdmin),
       ),
     );
