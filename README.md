@@ -4,6 +4,8 @@ Práctica Profesional Supervisada (PPS) — Tecnicatura Universitaria en Program
 
 E-commerce full stack para la venta general para una veterinaria, con catálogo de productos, carrito de compras, gestión de pedidos, promociones y un panel de administración.
 
+DEMO DESPLEGADA: https://vmcshop.onrender.com
+
 ## Stack
 
 **Backend**
