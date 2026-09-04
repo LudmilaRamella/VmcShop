@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { uploadUrl } from '../utils/uploads'
+import { imagenProducto, alFallarImagen } from '../utils/imagenCatalogo'
 
 const props = defineProps({
   producto: { type: Object, required: true },
@@ -26,18 +26,13 @@ function etiquetaDescuento(promocion) {
       class="relative aspect-[4/3] w-full bg-gray-50 block overflow-hidden"
     >
       <img
-        v-if="producto.imagen"
-        :src="uploadUrl('productos', producto.imagen)"
+        :src="imagenProducto(producto)"
+        @error="alFallarImagen($event, 'producto')"
         :alt="producto.nombre"
         loading="lazy"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
         :class="sinStock ? 'grayscale opacity-60' : ''"
       />
-      <div v-else class="h-full w-full flex items-center justify-center" :class="sinStock ? 'opacity-60' : ''">
-        <div class="h-11 w-11 rounded-full bg-white ring-1 ring-gray-100 flex items-center justify-center text-primary-300 shadow-sm">
-          <i class="fa-solid fa-paw text-base"></i>
-        </div>
-      </div>
 
       <span
         v-if="sinStock"

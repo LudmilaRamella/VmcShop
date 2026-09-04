@@ -5,7 +5,7 @@ import api from '../services/api'
 import { useAuthStore } from '../stores/auth'
 import { useCarritoStore } from '../stores/carrito'
 import socket from '../services/socket'
-import { uploadUrl } from '../utils/uploads'
+import { imagenProducto, alFallarImagen } from '../utils/imagenCatalogo'
 
 const route = useRoute()
 const router = useRouter()
@@ -88,16 +88,11 @@ onUnmounted(() => socket.off('producto:cambio', alCambiarUnProducto))
     <div v-else class="card p-6 sm:p-8 grid sm:grid-cols-2 gap-8">
       <div class="relative aspect-square bg-gray-100 rounded-xl overflow-hidden">
         <img
-          v-if="producto.imagen"
-          :src="uploadUrl('productos', producto.imagen)"
+          :src="imagenProducto(producto)"
+          @error="alFallarImagen($event, 'producto')"
           :alt="producto.nombre"
           class="h-full w-full object-cover"
         />
-        <div v-else class="h-full w-full flex items-center justify-center">
-          <div class="h-16 w-16 rounded-full bg-white ring-1 ring-gray-100 flex items-center justify-center text-primary-300 shadow-sm">
-            <i class="fa-solid fa-paw text-2xl"></i>
-          </div>
-        </div>
 
         <span v-if="producto.stock === 0" class="absolute top-3 right-3 bg-gray-800/90 text-white text-xs font-bold px-2.5 py-1 rounded-full">
           Sin stock

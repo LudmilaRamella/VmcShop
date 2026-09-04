@@ -1,0 +1,23 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VetLife">
+  <defs>
+    <linearGradient id="g-vetlife" x1="74.99999999999999%" y1="6.698729810778062%" x2="25.00000000000001%" y2="93.30127018922194%">
+    <stop offset="0%" stop-color="#0c6690"/>
+    <stop offset="100%" stop-color="#7dd3fc"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-vetlife)"/>
+  <circle cx="430" cy="430" r="70" fill="#ffffff" opacity="0.16"/>
+  <circle cx="70" cy="80" r="50" fill="#ffffff" opacity="0.16"/>
+  <circle cx="250" cy="182" r="86" fill="#ffffff" opacity="0.92"/>
+  <text x="250" y="212" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="92" font-weight="800" fill="#0c6690">V</text>
+  <g fill="#ffffff" transform="translate(212,258) scale(0.34)">
+    <g fill="#ffffff">
+      <ellipse cx="250" cy="235" rx="58" ry="46"/>
+      <circle cx="192" cy="160" r="24"/>
+      <circle cx="238" cy="132" r="24"/>
+      <circle cx="290" cy="132" r="24"/>
+      <circle cx="332" cy="160" r="24"/>
+    </g></g>
+  <text x="250" y="378" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="40" font-weight="800" fill="#ffffff">VetLife</text>
+  <text x="250" y="408" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="17" font-weight="500" letter-spacing="2" fill="#ffffff" opacity="0.85">SALUD ANIMAL</text>
+</svg>

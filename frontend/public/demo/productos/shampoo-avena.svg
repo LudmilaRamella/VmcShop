@@ -1,0 +1,23 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shampoo de Avena">
+  <defs>
+    <linearGradient id="g-shampoo-avena" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#7dd3fc"/>
+    <stop offset="100%" stop-color="#0c6690"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-shampoo-avena)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <rect x="222" y="120" width="56" height="34" rx="8"/>
+      <path d="M206 168 Q206 148 226 148 L274 148 Q294 148 294 168 L300 320 Q300 344 276 344 L224 344 Q200 344 200 320 Z"/>
+    </g>
+    <g fill="#00000022">
+      <rect x="222" y="190" width="56" height="16" rx="6"/>
+      <rect x="215" y="216" width="70" height="70" rx="10"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Shampoo de Avena</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Piel sensible</text>
+</svg>

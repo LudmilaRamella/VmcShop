@@ -1,0 +1,19 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Farmacia">
+  <defs>
+    <linearGradient id="g-farmacia" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#6ee7b7"/>
+    <stop offset="100%" stop-color="#047857"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-farmacia)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <rect x="215" y="128" width="70" height="184" rx="18"/>
+      <rect x="158" y="185" width="184" height="70" rx="18"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Farmacia</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Salud veterinaria</text>
+</svg>

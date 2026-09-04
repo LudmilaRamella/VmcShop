@@ -1,0 +1,22 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comedero">
+  <defs>
+    <linearGradient id="g-comedero" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#5fe8d5"/>
+    <stop offset="100%" stop-color="#126e64"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-comedero)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <path d="M156 210 Q156 268 250 268 Q344 268 344 210 L336 210 Q336 250 250 250 Q164 250 164 210 Z"/>
+      <path d="M156 208 Q156 176 250 176 Q344 176 344 208 Q344 226 250 226 Q156 226 156 208 Z"/>
+    </g>
+    <g fill="#00000018">
+      <ellipse cx="250" cy="205" rx="70" ry="14"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Comedero</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Acero inoxidable</text>
+</svg>

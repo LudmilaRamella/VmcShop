@@ -1,0 +1,26 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cama para Perro">
+  <defs>
+    <linearGradient id="g-cama-perro" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#e3c08f"/>
+    <stop offset="100%" stop-color="#9c6a35"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-cama-perro)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <rect x="140" y="210" width="220" height="86" rx="30"/>
+      <ellipse cx="205" cy="206" rx="42" ry="30"/>
+      <ellipse cx="295" cy="206" rx="42" ry="30"/>
+    </g>
+    <g fill="#00000018">
+      <circle cx="205" cy="252" r="9"/>
+      <circle cx="238" cy="252" r="9"/>
+      <circle cx="262" cy="252" r="9"/>
+      <circle cx="295" cy="252" r="9"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Cama para Perro</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Descanso premium</text>
+</svg>

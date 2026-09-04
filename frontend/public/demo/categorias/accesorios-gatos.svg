@@ -1,0 +1,31 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Accesorios para gatos">
+  <defs>
+    <linearGradient id="g-accesorios-gatos" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#8f66c9"/>
+    <stop offset="100%" stop-color="#4c2f6c"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-accesorios-gatos)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <polygon points="180,150 210,90 236,158"/>
+      <polygon points="320,150 290,90 264,158"/>
+      <circle cx="250" cy="215" r="86"/>
+    </g>
+    <g fill="#00000022">
+      <circle cx="222" cy="205" r="9"/>
+      <circle cx="278" cy="205" r="9"/>
+      <polygon points="250,222 240,236 260,236"/>
+    </g>
+    <g stroke="#00000022" stroke-width="4" stroke-linecap="round">
+      <line x1="150" y1="220" x2="205" y2="228"/>
+      <line x1="150" y1="240" x2="205" y2="240"/>
+      <line x1="350" y1="220" x2="295" y2="228"/>
+      <line x1="350" y1="240" x2="295" y2="240"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Accesorios para gatos</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Comodidad felina</text>
+</svg>

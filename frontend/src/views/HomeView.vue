@@ -5,6 +5,7 @@ import api from '../services/api'
 import { useAuthStore } from '../stores/auth'
 import logo from '../assets/logo.png'
 import { uploadUrl } from '../utils/uploads'
+import { imagenCategoria, imagenMarca, alFallarImagen } from '../utils/imagenCatalogo'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -157,14 +158,11 @@ onMounted(cargarInicio)
           class="card p-4 sm:p-5 flex flex-col items-center gap-2.5 hover:shadow-md hover:-translate-y-0.5 hover:border-primary-200 transition-all text-center"
         >
           <img
-            v-if="c.imagen"
-            :src="uploadUrl('categorias', c.imagen)"
+            :src="imagenCategoria(c)"
+            @error="alFallarImagen($event, 'categoria')"
             :alt="c.nombre"
             class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
           />
-          <div v-else class="w-14 h-14 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center text-xl font-bold ring-1 ring-primary-100">
-            {{ c.nombre?.[0]?.toUpperCase() }}
-          </div>
           <span class="font-medium text-gray-700 text-sm leading-tight">{{ c.nombre }}</span>
         </button>
       </div>
@@ -185,14 +183,11 @@ onMounted(cargarInicio)
             class="card p-5 w-36 shrink-0 flex flex-col items-center gap-2.5 hover:shadow-md hover:-translate-y-0.5 hover:border-primary-200 transition-all text-center"
           >
             <img
-              v-if="m.imagen"
-              :src="uploadUrl('marcas', m.imagen)"
+              :src="imagenMarca(m)"
+              @error="alFallarImagen($event, 'marca')"
               :alt="m.nombre"
               class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
             />
-            <div v-else class="w-14 h-14 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center text-lg font-bold ring-1 ring-primary-100">
-              {{ m.nombre?.[0]?.toUpperCase() }}
-            </div>
             <span class="font-medium text-gray-700 text-sm leading-tight">{{ m.nombre }}</span>
           </button>
         </div>

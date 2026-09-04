@@ -1,0 +1,24 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Juguetes">
+  <defs>
+    <linearGradient id="g-juguetes" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#fda4af"/>
+    <stop offset="100%" stop-color="#be123c"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-juguetes)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <circle cx="250" cy="210" r="94"/>
+    </g>
+    <g stroke="#00000022" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M162 210 Q250 170 338 210"/>
+      <path d="M162 210 Q250 250 338 210"/>
+      <path d="M250 116 Q210 210 250 304"/>
+      <path d="M250 116 Q290 210 250 304"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Juguetes</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Diversión asegurada</text>
+</svg>

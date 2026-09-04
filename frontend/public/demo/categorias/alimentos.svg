@@ -1,0 +1,26 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Alimentos">
+  <defs>
+    <linearGradient id="g-alimentos" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%">
+    <stop offset="0%" stop-color="#5fe8d5"/>
+    <stop offset="100%" stop-color="#126e64"/>
+  </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="40" fill="url(#g-alimentos)"/>
+  <circle cx="250" cy="196" r="132" fill="#ffffff" opacity="0.16"/>
+  <circle cx="90" cy="420" r="60" fill="#ffffff" opacity="0.16"/>
+  <circle cx="430" cy="70" r="44" fill="#ffffff" opacity="0.16"/>
+  <g transform="translate(0,-6)">
+    <g fill="#ffffff">
+      <path d="M188 130 L312 130 L332 320 Q332 340 312 340 L188 340 Q168 340 168 320 Z"/>
+      <path d="M188 130 Q188 96 220 96 L280 96 Q312 96 312 130 Z" opacity="0.55"/>
+    </g>
+    <g fill="#00000022">
+      <circle cx="222" cy="230" r="8"/>
+      <circle cx="250" cy="216" r="8"/>
+      <circle cx="278" cy="230" r="8"/>
+      <circle cx="236" cy="252" r="8"/>
+      <circle cx="264" cy="252" r="8"/>
+    </g></g>
+  <text x="250" y="392" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Alimentos</text>
+  <text x="250" y="424" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="19" font-weight="500" fill="#ffffff" opacity="0.85">Nutrición balanceada</text>
+</svg>
