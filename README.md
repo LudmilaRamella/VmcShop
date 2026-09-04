@@ -4,8 +4,10 @@ Práctica Profesional Supervisada (PPS) — Tecnicatura Universitaria en Program
 
 E-commerce full stack para la venta general para una veterinaria, con catálogo de productos, carrito de compras, gestión de pedidos, promociones y un panel de administración.
 
-DEMO DESPLEGADA: https://vmcshop.onrender.com
-Estado de la demo
+## DEMO DESPLEGADA: https://vmcshop.onrender.com
+
+**Estado de la demo**
+
 La aplicación se encuentra desplegada con fines demostrativos. Debido al uso de servicios gratuitos, algunos componentes pueden entrar en suspensión tras períodos de inactividad, por lo que el primer acceso puede demorar o la demo puede encontrarse temporalmente fuera de servicio.
 
 El proyecto también puede ejecutarse localmente siguiendo las instrucciones de instalación.
