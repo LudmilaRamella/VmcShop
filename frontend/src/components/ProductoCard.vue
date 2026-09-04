@@ -27,7 +27,7 @@ function etiquetaDescuento(promocion) {
     >
       <img
         :src="imagenProducto(producto)"
-        @error="alFallarImagen($event, 'producto')"
+        @error="alFallarImagen($event, 'producto', producto)"
         :alt="producto.nombre"
         loading="lazy"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"

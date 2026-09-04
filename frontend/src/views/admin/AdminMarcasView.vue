@@ -161,7 +161,7 @@ onMounted(cargar)
             <td class="p-3">
               <img
                 :src="imagenMarca(m)"
-                @error="alFallarImagen($event, 'marca')"
+                @error="alFallarImagen($event, 'marca', m)"
                 :alt="m.nombre"
                 class="w-9 h-9 object-contain rounded"
               />

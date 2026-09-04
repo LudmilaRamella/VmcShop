@@ -120,7 +120,7 @@ async function confirmar() {
           <div v-for="item in carrito.items" :key="item.id" class="card p-3 flex flex-wrap sm:flex-nowrap items-center gap-3">
             <img
               :src="imagenProducto(item.producto)"
-              @error="alFallarImagen($event, 'producto')"
+              @error="alFallarImagen($event, 'producto', item.producto)"
               :alt="item.producto.nombre"
               class="w-16 h-16 object-cover rounded-lg shrink-0"
             />

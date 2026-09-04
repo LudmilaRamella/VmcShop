@@ -1,15 +1,18 @@
 // Resuelve la imagen a mostrar para categorías, marcas y productos del
-// catálogo usando assets estáticos servidos por el propio frontend
-// (frontend/public/demo/...). Así la demo no depende de backend/uploads,
-// que en Render no persiste archivos entre deploys.
+// catálogo. Prioridad absoluta a lo que haya subido el admin; la demo
+// (frontend/public/demo/...) es solo un fallback visual.
 //
 // Reglas:
-// - Si el campo "imagen" es una URL absoluta (http/https), se usa tal cual.
-// - En cualquier otro caso (vacío, o un nombre de archivo que solo existía
-//   en backend/uploads) se reemplaza por una imagen demo.
-// - La imagen demo se elige según el nombre de la categoría/marca/producto,
-//   si coincide con algo conocido; si no, se usa una imagen genérica del
-//   mismo tipo (nunca queda un ícono roto).
+// 1. Si "imagen" es una URL absoluta (http/https), se usa tal cual.
+// 2. Si "imagen" es una ruta /uploads/... o un nombre de archivo (lo que
+//    guarda el backend al subir), se resuelve contra VITE_UPLOADS_URL.
+// 3. Si "imagen" está vacío, se usa la imagen demo.
+// 4. Si la imagen real (subida) falla al cargar, se cae a la imagen demo
+//    (nunca se reemplaza una imagen real válida por una demo de antemano).
+// 5. Si hasta la demo falla, se cae a la genérica del tipo (nunca queda un
+//    ícono roto).
+
+import { uploadUrl } from './uploads'
 
 function normalizar(texto) {
   return (texto || '')
@@ -28,9 +31,24 @@ function incluyeAlguno(texto, palabras) {
   return palabras.some((palabra) => texto.includes(palabra))
 }
 
-export function imagenCategoria(categoria) {
-  if (esUrlAbsoluta(categoria?.imagen)) return categoria.imagen
+// El backend guarda solo el nombre de archivo (ej. "categoria-123-456.jpg"),
+// pero por las dudas se admite que "imagen" venga como "/uploads/xxx/archivo"
+// o "xxx/archivo": se limpia el prefijo antes de armar la URL final, para no
+// terminar con una ruta duplicada tipo ".../uploads/categorias/categorias/...".
+function limpiarNombreArchivo(valor, carpeta) {
+  let limpio = valor.toString().trim().replace(/^\/+/, '')
+  limpio = limpio.replace(/^uploads\//i, '')
+  limpio = limpio.replace(new RegExp(`^${carpeta}/`, 'i'), '')
+  return limpio
+}
 
+function resolverImagenSubida(valor, carpeta) {
+  if (!valor) return null
+  if (esUrlAbsoluta(valor)) return valor
+  return uploadUrl(carpeta, limpiarNombreArchivo(valor, carpeta))
+}
+
+function demoCategoria(categoria) {
   const nombre = normalizar(categoria?.nombre)
   let archivo = 'categoria-generica'
   if (incluyeAlguno(nombre, ['aliment', 'nutricion', 'croqueta'])) archivo = 'alimentos'
@@ -43,9 +61,7 @@ export function imagenCategoria(categoria) {
   return `/demo/categorias/${archivo}.svg`
 }
 
-export function imagenMarca(marca) {
-  if (esUrlAbsoluta(marca?.imagen)) return marca.imagen
-
+function demoMarca(marca) {
   const nombre = normalizar(marca?.nombre).replace(/\s+/g, '')
   let archivo = 'marca-generica'
   if (nombre.includes('pawcare')) archivo = 'pawcare'
@@ -56,9 +72,7 @@ export function imagenMarca(marca) {
   return `/demo/marcas/${archivo}.svg`
 }
 
-export function imagenProducto(producto) {
-  if (esUrlAbsoluta(producto?.imagen)) return producto.imagen
-
+function demoProducto(producto) {
   const nombre = normalizar(producto?.nombre)
   if (incluyeAlguno(nombre, ['aliment', 'balanceado', 'croqueta'])) {
     return `/demo/productos/${nombre.includes('gato') ? 'alimento-gato-premium' : 'alimento-perro-premium'}.svg`
@@ -71,21 +85,45 @@ export function imagenProducto(producto) {
 
   // Sin coincidencia por nombre: si se sabe la categoría, se usa su imagen
   // demo (queda coherente); si no, la imagen genérica de producto.
-  if (producto?.categoria?.nombre) return imagenCategoria(producto.categoria)
+  if (producto?.categoria?.nombre) return demoCategoria(producto.categoria)
   return '/demo/productos/producto-generico.svg'
 }
 
-// Handler para el evento @error de <img>: si una imagen demo llegara a
-// fallar igual (ruta mal escrita, asset borrado, etc.), muestra la
-// genérica del tipo correspondiente en vez de dejar el ícono roto.
-export function alFallarImagen(evento, tipo) {
+export function imagenCategoria(categoria) {
+  return resolverImagenSubida(categoria?.imagen, 'categorias') || demoCategoria(categoria)
+}
+
+export function imagenMarca(marca) {
+  return resolverImagenSubida(marca?.imagen, 'marcas') || demoMarca(marca)
+}
+
+export function imagenProducto(producto) {
+  return resolverImagenSubida(producto?.imagen, 'productos') || demoProducto(producto)
+}
+
+// Handler para el evento @error de <img>. Se le pasa la entidad (categoria/
+// marca/producto) para poder calcular su demo correspondiente:
+// - si lo que fallo era una imagen subida real, cae a la demo (por nombre).
+// - si lo que fallo ya era una demo (o no hay entidad para calcularla), cae
+//   a la generica del tipo, para nunca dejar un icono roto.
+export function alFallarImagen(evento, tipo, entidad) {
+  const demos = { categoria: demoCategoria, marca: demoMarca, producto: demoProducto }
   const genericas = {
     categoria: '/demo/categorias/categoria-generica.svg',
     marca: '/demo/marcas/marca-generica.svg',
     producto: '/demo/productos/producto-generico.svg',
   }
+
+  const srcActual = evento.target.src
+  const yaEsDemo = srcActual.includes('/demo/')
+
+  if (!yaEsDemo && demos[tipo]) {
+    evento.target.src = demos[tipo](entidad)
+    return
+  }
+
   const destino = genericas[tipo]
-  if (destino && evento.target.src.indexOf(destino) === -1) {
+  if (destino && srcActual.indexOf(destino) === -1) {
     evento.target.src = destino
   }
 }

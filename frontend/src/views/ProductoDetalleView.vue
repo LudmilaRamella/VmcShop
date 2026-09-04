@@ -89,7 +89,7 @@ onUnmounted(() => socket.off('producto:cambio', alCambiarUnProducto))
       <div class="relative aspect-square bg-gray-100 rounded-xl overflow-hidden">
         <img
           :src="imagenProducto(producto)"
-          @error="alFallarImagen($event, 'producto')"
+          @error="alFallarImagen($event, 'producto', producto)"
           :alt="producto.nombre"
           class="h-full w-full object-cover"
         />

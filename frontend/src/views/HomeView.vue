@@ -159,7 +159,7 @@ onMounted(cargarInicio)
         >
           <img
             :src="imagenCategoria(c)"
-            @error="alFallarImagen($event, 'categoria')"
+            @error="alFallarImagen($event, 'categoria', c)"
             :alt="c.nombre"
             class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
           />
@@ -184,7 +184,7 @@ onMounted(cargarInicio)
           >
             <img
               :src="imagenMarca(m)"
-              @error="alFallarImagen($event, 'marca')"
+              @error="alFallarImagen($event, 'marca', m)"
               :alt="m.nombre"
               class="w-14 h-14 rounded-full object-cover ring-1 ring-gray-100"
             />
